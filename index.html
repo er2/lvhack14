@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
   <script>
   $(function() {
     var evenWords = [
@@ -45,7 +45,7 @@
 	"bison",
 	"blackjack",
 	"blockade",
-	"blowtorch"
+	"blowtorch",
 	"bluebird",
 	"bombast",
 	"bookshelf",
@@ -525,7 +525,7 @@ var oddWords=[
 	"Yucatán"];
 var availableTags = evenWords.concat(oddWords);
     function split( val ) {
-      return val.split( /,\s*/ );
+      return val.split( / \s*/ );
     }
     function extractLast( term ) {
       return split( term ).pop();
@@ -559,6 +559,9 @@ var availableTags = evenWords.concat(oddWords);
           // add placeholder to get the comma-and-space at the end
           terms.push( "" );
           this.value = terms.join( " " );
+	  document.getElementById("list").innerHTML=terms;
+	  var byte = (availableTags.indexOf(ui.item.value)%256).toString(16);
+	  document.getElementById("data").innerHTML+=ui.item.value+" ";
           return false;
         }
       });
@@ -571,7 +574,8 @@ var availableTags = evenWords.concat(oddWords);
   <label for="tags">Enter PGP Words: </label>
   <input id="tags" size="50">
 </div>
- 
+<div id="list"></div>
+<div id="data"></div>
  
 </body>
 </html>
