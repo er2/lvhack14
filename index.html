@@ -560,19 +560,20 @@ var count =0;
           // add placeholder to get the comma-and-space at the end
           terms.push( "" );
           this.value = terms.join( " " );
+
 	  document.getElementById("list").innerHTML=terms;
 	  var index = availableTags.indexOf(ui.item.value);
 	  var byte = (index % 256).toString(16).toUpperCase();
 
 	  //pad byte
-	  if (index < 0x10)
+	  if (index % 256 < 0x10)
 		byte = "0"+byte;
 
 	  //check if from even or odd list
 	  if (count%2 != index/256) {
-		var errorByte = document.createElement("div");
-		errorByte.appendChild(createTextNode(byte));
-		errorByte.style.color = "red";
+		//var errorByte = document.createElement("div");
+		//errorByte.appendChild(createTextNode(byte));
+		//errorByte.style.color = "red";
 		
 	  }
 
@@ -583,24 +584,32 @@ var count =0;
 	  count++;
 
 	  //newline every so often
-	  if (count % 12 == 0)
-		byte += "<br/>";
+//	  if (count % 12 == 0)
+//		byte += "<br />";
 	  document.getElementById("data").innerHTML+=byte;
 
           return false;
         }
       });
   });
+
+  function toWords(){
+	alert("Converting");
+  };
   </script>
 </head>
 <body>
- 
+<h1>PGP Word List Dictation Tool</h1>
 <div class="ui-widget">
   <label for="tags">Enter PGP Words: </label>
   <input id="tags" size="50">
 </div>
 <div id="list"></div>
-<div id="data"></div>
+<textarea id="data"></textarea>
+<h2>Bytes to words</h2>
+<textarea></textarea>
+<input type="button" onclick="toWords();" value="Convert"></input>
+<div id="words"></div>
  
 </body>
 </html>
