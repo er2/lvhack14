@@ -524,6 +524,7 @@ var oddWords=[
 	"yesteryear",
 	"Yucatán"];
 var availableTags = evenWords.concat(oddWords);
+var count =0;
     function split( val ) {
       return val.split( / \s*/ );
     }
@@ -560,8 +561,32 @@ var availableTags = evenWords.concat(oddWords);
           terms.push( "" );
           this.value = terms.join( " " );
 	  document.getElementById("list").innerHTML=terms;
-	  var byte = (availableTags.indexOf(ui.item.value)%256).toString(16);
-	  document.getElementById("data").innerHTML+=ui.item.value+" ";
+	  var index = availableTags.indexOf(ui.item.value);
+	  var byte = (index % 256).toString(16).toUpperCase();
+
+	  //pad byte
+	  if (index < 0x10)
+		byte = "0"+byte;
+
+	  //check if from even or odd list
+	  if (count%2 != index/256) {
+		var errorByte = document.createElement("div");
+		errorByte.appendChild(createTextNode(byte));
+		errorByte.style.color = "red";
+		
+	  }
+
+	  //spaces between pairs of bytes
+	  if (count % 2 == 1)
+		byte = byte + " ";
+
+	  count++;
+
+	  //newline every so often
+	  if (count % 12 == 0)
+		byte += "<br/>";
+	  document.getElementById("data").innerHTML+=byte;
+
           return false;
         }
       });
