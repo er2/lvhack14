@@ -594,7 +594,29 @@ var count =0;
   });
 
   function toWords(){
-	alert("Converting");
+	//alert("Converting");
+	var data = document.getElementById("data_input").value;
+	var pairs = data.split("\w");
+ 	var count = 0;
+  var words;
+	for (var word in pairs) {
+		for (var byteString = word.slice(0,2); (count*2)+2 <= word.length; byteString = word.slice(count*2, (count*2)+2))
+			document.getElementById("words").innerHTML.concat(byteToWord(count++%2, byteString));
+			//words.push(byteToWord(count++%2, byteString));
+	
+	}
+
+	function byteToWord(parity, byteString) {
+		byte = parseInt(byteString, 16);
+		if (0x00 <= byte && byte <= 0xFF) {
+			if(parity==0)
+				return evenWords[byte];
+			else
+				return oddWords[byte];
+		} else
+			alert("Invalid data");
+	}
+
   };
   </script>
 </head>
@@ -605,9 +627,9 @@ var count =0;
   <input id="tags" size="50">
 </div>
 <div id="list"></div>
-<textarea id="data"></textarea>
+<textarea id="data" onClick="this.select();"></textarea>
 <h2>Bytes to words</h2>
-<textarea></textarea>
+<textarea id="data_input"></textarea>
 <input type="button" onclick="toWords();" value="Convert"></input>
 <div id="words"></div>
  
