@@ -634,35 +634,49 @@ var availableTags = [evenWords, oddWords];
 <body onload="document.getElementById('tags').focus()">
 	<div class="row">
 		<div class="large-12 columns">
-			<h1>PGP Word List Dictation Tool</h1>
+			<h1>PGP Word List Dictation Tool<small> by <a href="http://ericrie.se/">Eric Riese</a></small></h1>
 			<hr/>
 		</div>
 	</div>
 	<div class="row">
 		<form>
-			<div class="medium-6 columns">
-				<h3>Words &#8594; Bytes</h3>
-				<label for="tags"  class="large-8 columns">
-					Enter PGP Words:<input id="tags" type="text" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech>
-				</label>
-				<input type="button" onclick="clearn();" value="clear" class="postfix small radius button">
-				</input>
-				<div>
-					<textarea id="data" onClick="this.select();"></textarea>
+			<div class="medium-6 columns panel">
+				<div class="panel">
+					<h3>Words &#8594; Bytes</h3>
+					<div class="medium-6 columns panel">
+					<label for="tags">
+						<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
+					</div>
+					</label>
+					<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
+					<div>
+						<textarea id="data" onClick="this.select();"></textarea>
+					</div>
 				</div>
 			</div>
 			<div class="medium-6 columns">
-				<h3>Bytes &#8594; Words</h3>
-				<textarea id="data_input"></textarea>
-				<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
-				<div id="words"></div>
+				<div class="panel">
+					<h3>Bytes &#8594; Words</h3>
+					<textarea id="data_input"></textarea>
+					<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
+					<div id="words"></div>
+				</div>
 			</div>
 		</form>
 	</div>
-	<div class="row">
-		<div class="large-8 columns">
-			Source code available on <a href="https://github.com/er2/lvhack14/"><img src="GitHub_Logo.png" width=88></img></a>
+	<footer class="row">
+		<div class="large-12 columns">
+		<hr/>
+			<div class="large-4 columns">
+				Source code available on <a href="https://github.com/er2/lvhack14/"><img src="GitHub_Logo.png" width=66></img></a>
+			</div>
+			<div class="large-4 columns">
+				Built with <a href="http://jquery.com/ui/">jQuery UI</a>
+			</div>
+			<div class="large-4 columns">
+				Design by <a href="http://foundation.zurb.com/">Foundation by Zurb</a>
+			</div>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>
