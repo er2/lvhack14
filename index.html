@@ -592,17 +592,14 @@ var availableTags = [evenWords, oddWords];
 	//alert("Converting");
 	document.getElementById("words").innerHTML = "";
 	var data = document.getElementById("data_input").value;
-	var pairs = data.split("\w");
+	data = data.replace(new RegExp("[^0-9a-fA-F]+"), "");
  	var count = 0;
-  var words;
-	for (var wordCount in pairs) {
-		var word = pairs[wordCount];
-		for (var byteString = word.slice(0,2); (count*2)+2 <= word.length; byteString = word.slice(count*2, (count*2)+2)) {
-			var pgpword = byteToWord(count++%2, byteString);
-			document.getElementById("words").innerHTML+= " " + pgpword;
-			//words.push(byteToWord(count++%2, byteString));
-		}
+	var words;
 	
+	for (var byteString = data.slice(0,2); (count*2)+2 <= data.length; byteString = data.slice(count*2, (count*2)+2)) {
+		var pgpword = byteToWord(count++%2, byteString);
+		document.getElementById("words").innerHTML+= " " + pgpword;
+		//words.push(byteToWord(count++%2, byteString));
 	}
 
 	function byteToWord(parity, byteString) {
@@ -619,12 +616,14 @@ var availableTags = [evenWords, oddWords];
 	function clear() {
 		terms = [];
 		count = 0;
+		document.getElementById("words").innerHTML ="";
+		document.getElementById("tags").innerHTML ="";
 	}
 
   };
   </script>
 </head>
-<body>
+<body onload="document.getElementById('tags').focus()">
 <div class="row">
 	<div class="large-8 columns">
 	<h1>PGP Word List Dictation Tool</h1>
