@@ -624,25 +624,28 @@ var availableTags = [evenWords, oddWords];
   </script>
 </head>
 <body onload="document.getElementById('tags').focus()">
-<div class="row">
-	<div class="large-8 columns">
-	<h1>PGP Word List Dictation Tool</h1>
+	<div class="row">
 		<div class="large-8 columns">
-			<label for="tags">Enter PGP Words: </label>
-			<input id="tags">
-		</div>
-		<input type="button" onclick="clear();" value="clear"></input>
-		<div class="row">
-			<div class="large-8 columns">
-				<textarea id="data" onClick="this.select();" class="large-8 columns"></textarea>
+			<h1>PGP Word List Dictation Tool</h1>
+			<div>
+				<label for="tags">Enter PGP Words: </label>
+				<input id="tags" type="text" x-webkit-speech>
+			</div>
+			<input id="mic" type="button" onclick="clear();" value="clear" class="postfix">
+			</input>
+			<div>
+				<textarea id="data" onClick="this.select();"></textarea>
 			</div>
 		</div>
-		<hr/>
-		<h2>Bytes to words</h2>
-		<textarea id="data_input"></textarea>
-		<input type="button" onclick="toWords();" value="Convert"></input>
-		<div id="words"></div>
+		<div class="row">
+			<div class="large-8 columns">
+				<hr/>
+				<h2>Bytes to words</h2>
+				<textarea id="data_input"></textarea>
+				<input type="button" onclick="toWords();" value="Convert"></input>
+				<div id="words"></div>
+			</div>
+		</div>
 	</div>
-</div>
 </body>
 </html>
