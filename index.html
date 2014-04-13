@@ -641,6 +641,7 @@ var availableTags = [evenWords, oddWords];
 	<div class="row">
 		<form>
 			<div class="medium-6 columns">
+				<h3>Words &#8594; Bytes</h3>
 				<label for="tags"  class="large-8 columns">
 					Enter PGP Words:<input id="tags" type="text" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech>
 				</label>
@@ -651,7 +652,7 @@ var availableTags = [evenWords, oddWords];
 				</div>
 			</div>
 			<div class="medium-6 columns">
-				<h2>Bytes to words</h2>
+				<h3>Bytes &#8594; Words</h3>
 				<textarea id="data_input"></textarea>
 				<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
 				<div id="words"></div>
