@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>PGP Word List dictator</title>
+	<title>PGP Word List Dictation Tool</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -525,6 +525,7 @@
 		"yesteryear",
 		"Yucatán"];
 var availableTags = [evenWords, oddWords];
+var byteStringArr = [];
 
   $(function() {
 		var count =0;
@@ -565,19 +566,22 @@ var availableTags = [evenWords, oddWords];
           this.value = terms.join( " " );
 
 	  //document.getElementById("list").innerHTML=terms;
-	  var index = searchWord(count%2, ui.item.value);
-	  var byte = toByteString(index);
-
+	var index = searchWord(count%2, ui.item.value);
+	var byteString = toByteString(index);
+	  
 	  //spaces between pairs of bytes
-	  if (count % 2 == 1)
-		byte = byte + " ";
+	if (count % 2 == 1)
+		byteStringArr.push(byteStringArr.pop()+byteString);
+	  	//byteStringArr[byteString.length-1]+=byteString;
+	else
+		byteStringArr.push(byteString);
 
 	  count++;
 
 	  //newline every so often
 //	  if (count % 12 == 0)
 //		byte += "<br />";
-	  document.getElementById("data").innerHTML+=byte;
+	  document.getElementById("data").innerHTML=byteStringArr.join(" ");
 
           return false;
         }
@@ -590,15 +594,15 @@ var availableTags = [evenWords, oddWords];
 	var data = document.getElementById("data_input").value;
 	data = data.replace(new RegExp("[^0-9a-fA-F]+"), "");
  	var count = 0;
-	var words;
+	var words = [];
 	
 	for (var byteString = data.slice(0,2); (count*2)+2 <= data.length; byteString = data.slice(count*2, (count*2)+2)) {
 		var pgpword = byteToWord(count++%2, byteString);
-		document.getElementById("words").innerHTML+= " " + pgpword;
-		//words.push(byteToWord(count++%2, byteString));
+		//document.getElementById("words").innerHTML+= " " + pgpword;
+		words.push(pgpword);
 	}
 	
-	document.getElementById("data").innerHTML = document.getElementById("data").innerHTML.trim();
+	document.getElementById("words").innerHTML = words.join(" ");
 	
 	}
 
@@ -619,7 +623,7 @@ var availableTags = [evenWords, oddWords];
   
 	function voice() {
 		//cool stuff here
-		clearn();
+		document.getElementById("data").value = "";
 		var words = document.getElementById("tags").value.split("\w");
 		var bytes = [];
 		for (var i in words) {
@@ -665,11 +669,13 @@ var availableTags = [evenWords, oddWords];
 			<div class="medium-6 columns panel">
 				<div class="panel">
 					<h3>Words &#8594; Bytes</h3>
-					<label for="tags">
-						<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
-					</label>
+					<div class="medium-6 columns panel">
+						<label for="tags">
+							<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
+						</label>
+					</div>
 					<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
-					<input class="small radius button" type="button" onclick="voice();" value="To DATA"></input>
+					<input class="small radius button" type="button" onclick="voice();" value="To DATA"/>
 					<div>
 						<textarea id="data" onClick="this.select();"></textarea>
 					</div>
