@@ -565,20 +565,12 @@ var availableTags = [evenWords, oddWords];
           this.value = terms.join( " " );
 
 	  //document.getElementById("list").innerHTML=terms;
-	  var index = availableTags.indexOf(ui.item.value);
-	  var byte = (index % 256).toString(16).toUpperCase();
+	  var index = availableTags[count%2].indexOf(ui.item.value);
+	  var byte = (index).toString(16).toUpperCase();
 
 	  //pad byte
-	  if (index % 256 < 0x10)
+	  if (index < 0x10)
 		byte = "0"+byte;
-
-	  //check if from even or odd list
-	  if (count%2 != index/256) {
-		//var errorByte = document.createElement("div");
-		//errorByte.appendChild(createTextNode(byte));
-		//errorByte.style.color = "red";
-		
-	  }
 
 	  //spaces between pairs of bytes
 	  if (count % 2 == 1)
