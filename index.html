@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>PGP Word List dictator</title>
+	<meta charset="utf-8">
+	<title>PGP Word List dictator</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/foundation.css" />
 	<script src="js/vendor/modernizr.js"></script>
   <script>
@@ -628,10 +628,11 @@ var availableTags = [evenWords, oddWords];
 		<div class="large-8 columns">
 			<h1>PGP Word List Dictation Tool</h1>
 			<div>
-				<label for="tags">Enter PGP Words: </label>
-				<input id="tags" type="text" x-webkit-speech>
+				<label for="tags"  class="large-8 columns">Enter PGP Words:
+					<input id="tags" type="text" x-webkit-speech>
+				</label>
 			</div>
-			<input id="mic" type="button" onclick="clear();" value="clear" class="postfix">
+			<input id="mic" type="button" onclick="clear();" value="clear" class="postfix small radius button" ">
 			</input>
 			<div>
 				<textarea id="data" onClick="this.select();"></textarea>
@@ -642,7 +643,7 @@ var availableTags = [evenWords, oddWords];
 				<hr/>
 				<h2>Bytes to words</h2>
 				<textarea id="data_input"></textarea>
-				<input type="button" onclick="toWords();" value="Convert"></input>
+				<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
 				<div id="words"></div>
 			</div>
 		</div>
