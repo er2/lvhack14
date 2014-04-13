@@ -565,12 +565,8 @@ var availableTags = [evenWords, oddWords];
           this.value = terms.join( " " );
 
 	  //document.getElementById("list").innerHTML=terms;
-	  var index = availableTags[count%2].indexOf(ui.item.value);
-	  var byte = (index).toString(16).toUpperCase();
-
-	  //pad byte
-	  if (index < 0x10)
-		byte = "0"+byte;
+	  var index = searchWord(count%2, ui.item.value);
+	  var byte = toByteString(index);
 
 	  //spaces between pairs of bytes
 	  if (count % 2 == 1)
@@ -601,6 +597,10 @@ var availableTags = [evenWords, oddWords];
 		document.getElementById("words").innerHTML+= " " + pgpword;
 		//words.push(byteToWord(count++%2, byteString));
 	}
+	
+	document.getElementById("data").innerHTML = document.getElementById("data").innerHTML.trim();
+	
+	}
 
 	function byteToWord(parity, byteString) {
 		byte = parseInt(byteString, 16);
@@ -612,21 +612,43 @@ var availableTags = [evenWords, oddWords];
 		} else
 			alert("Invalid data");
 	}
-
-	
-	
-	
-
-  };
+  
+  	function searchWord(parity, word) {
+  		return availableTags[parity].indexOf(word);
+  	}
   
 	function voice() {
 		//cool stuff here
+		clearn();
+		var words = document.getElementById("tags").value.split("\w");
+		var bytes = [];
+		for (var i in words) {
+			var word = words[i];
+			bytes.push(searchWord(i%2, word));
+		}
+		
+		for (var j in bytes) {
+			var byte = bytes[j];
+			document.getElementById("data").value += toByteString(byte);
+			if (j%2==1)
+				document.getElementById("data").value += " ";
+		}
+	}
+	
+	function toByteString(num) {
+		var byte = (num).toString(16).toUpperCase();
+
+		//pad byte
+		if (num < 0x10)
+			byte = "0"+byte;
+			
+		return byte;
 	}
   
 	function clearn() {
 		terms = [];
 		count = 0;
-		document.getElementById("words").value ="";
+		document.getElementById("data").value ="";
 		document.getElementById("tags").value ="";
 	}
   </script>
@@ -643,12 +665,11 @@ var availableTags = [evenWords, oddWords];
 			<div class="medium-6 columns panel">
 				<div class="panel">
 					<h3>Words &#8594; Bytes</h3>
-					<div class="medium-6 columns panel">
 					<label for="tags">
 						<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
-					</div>
 					</label>
 					<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
+					<input class="small radius button" type="button" onclick="voice();" value="To DATA"></input>
 					<div>
 						<textarea id="data" onClick="this.select();"></textarea>
 					</div>
@@ -657,9 +678,9 @@ var availableTags = [evenWords, oddWords];
 			<div class="medium-6 columns">
 				<div class="panel">
 					<h3>Bytes &#8594; Words</h3>
-					<textarea id="data_input"></textarea>
+					<textarea id="data_input" onchange="toWords();"></textarea>
 					<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
-					<div id="words"></div>
+					<textarea id="words" onclick="this.select();"></textarea>
 				</div>
 			</div>
 		</form>
