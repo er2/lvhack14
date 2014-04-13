@@ -673,11 +673,9 @@
 			<div class="medium-6 columns panel">
 				<div class="panel">
 					<h3>Words &#8594; Bytes</h3>
-					<div class="medium-6 columns panel">
-						<label for="tags">
-							<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
-						</label>
-					</div>
+					<label for="tags">
+						<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
+					</label>
 					<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
 					<input class="small radius button" type="button" onclick="voice();" value="To DATA"/>
 					<div>
@@ -688,7 +686,7 @@
 			<div class="medium-6 columns">
 				<div class="panel">
 					<h3>Bytes &#8594; Words</h3>
-					<textarea id="data_input" onchange="toWords();"></textarea>
+					<textarea id="data_input" onchange="toWords();" placeholder="Enter Data"></textarea>
 					<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
 					<textarea id="words" onclick="this.select();"></textarea>
 				</div>
