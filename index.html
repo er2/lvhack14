@@ -9,6 +9,7 @@
 	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/foundation.css" />
 	<script src="js/vendor/modernizr.js"></script>
+	<script src="js/autoselect.js"></script>
   <script>
     var evenWords = [
       "aardvark",
@@ -591,7 +592,7 @@
 	//alert("Converting");
 	document.getElementById("words").innerHTML = "";
 	var data = document.getElementById("data_input").value;
-	data = data.replace(new RegExp("[^0-9a-fA-F]+"), "");
+	data = data.replace(/[^0-9a-fA-F]+/g, "");
  	var count = 0;
 	var words = [];
 	
@@ -647,7 +648,7 @@
 		var byte = (num).toString(16).toUpperCase();
 
 		//pad byte
-		if (num < 0x10)
+		if (byte.length == 1)
 			byte = "0"+byte;
 			
 		return byte;
@@ -669,29 +670,27 @@
 		</div>
 	</div>
 	<div class="row">
-		<form>
-			<div class="medium-6 columns panel">
-				<div class="panel">
-					<h3>Words &#8594; Bytes</h3>
-					<label for="tags">
-						<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
-					</label>
-					<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
-					<input class="small radius button" type="button" onclick="voice();" value="To DATA"/>
-					<div>
-						<textarea id="data" onClick="this.select();"></textarea>
-					</div>
+		<div class="medium-6 columns panel">
+			<div class="panel">
+				<h3>Words &#8594; Bytes</h3>
+				<label for="tags">
+					<input id="tags" type="text" placeholder="Enter PGP Words" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech/>
+				</label>
+				<input type="button" onclick="clearn();" value="clear" class="small radius button"/>
+				<input class="small radius button" type="button" onclick="voice();" value="To DATA"/>
+				<div>
+					<textarea id="data" onClick="this.select();"></textarea>
 				</div>
 			</div>
-			<div class="medium-6 columns">
-				<div class="panel">
-					<h3>Bytes &#8594; Words</h3>
-					<textarea id="data_input" onchange="toWords();" placeholder="Enter Data"></textarea>
-					<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
-					<textarea id="words" onclick="this.select();"></textarea>
-				</div>
+		</div>
+		<div class="medium-6 columns">
+			<div class="panel">
+				<h3>Bytes &#8594; Words</h3>
+				<textarea id="data_input" onchange="toWords();" placeholder="Enter Data"></textarea>
+				<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
+				<textarea id="words" onclick="this.select();"></textarea>
 			</div>
-		</form>
+		</div>
 	</div>
 	<footer class="row">
 		<div class="large-12 columns">
