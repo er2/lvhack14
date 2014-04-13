@@ -633,28 +633,30 @@ var availableTags = [evenWords, oddWords];
 </head>
 <body onload="document.getElementById('tags').focus()">
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-12 columns">
 			<h1>PGP Word List Dictation Tool</h1>
-			<form>
-				<div>
-					<label for="tags"  class="large-8 columns">
-						Enter PGP Words:<input id="tags" type="text" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech>
-					</label>
-				</div>
-				<input id="mic" type="button" onclick="clearn();" value="clear" class="postfix small radius button">
+			<hr/>
+		</div>
+	</div>
+	<div class="row">
+		<form>
+			<div class="medium-6 columns">
+				<label for="tags"  class="large-8 columns">
+					Enter PGP Words:<input id="tags" type="text" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech>
+				</label>
+				<input type="button" onclick="clearn();" value="clear" class="postfix small radius button">
 				</input>
 				<div>
 					<textarea id="data" onClick="this.select();"></textarea>
 				</div>
-				<div class="large-8 columns">
-					<hr/>
-					<h2>Bytes to words</h2>
-					<textarea id="data_input"></textarea>
-					<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
-					<div id="words"></div>
-				</div>
-			</form>
-		</div>
+			</div>
+			<div class="medium-6 columns">
+				<h2>Bytes to words</h2>
+				<textarea id="data_input"></textarea>
+				<input class="small radius button" type="button" onclick="toWords();" value="Convert"></input>
+				<div id="words"></div>
+			</div>
+		</form>
 	</div>
 	<div class="row">
 		<div class="large-8 columns">
