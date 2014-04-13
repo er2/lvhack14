@@ -613,14 +613,25 @@ var availableTags = [evenWords, oddWords];
 			alert("Invalid data");
 	}
 
-	function clear() {
-		terms = [];
-		count = 0;
-		document.getElementById("words").innerHTML ="";
-		document.getElementById("tags").innerHTML ="";
-	}
+	
+	
+	
 
   };
+  
+	function voice() {
+		alert("success");
+		alert(document.getElementById("tags").value);
+		var input = document.getElementById("tags").value;
+		document.getElementById("data").innerHTML = input;
+	}
+  
+	function clearn() {
+		terms = [];
+		count = 0;
+		document.getElementById("words").value ="";
+		document.getElementById("tags").value ="";
+	}
   </script>
 </head>
 <body onload="document.getElementById('tags').focus()">
@@ -632,7 +643,7 @@ var availableTags = [evenWords, oddWords];
 					<input id="tags" type="text" x-webkit-speech>
 				</label>
 			</div>
-			<input id="mic" type="button" onclick="clear();" value="clear" class="postfix small radius button" ">
+			<input id="mic" type="button" onclick="clearn();" value="clear" class="postfix small radius button" onwebkitspeechchange="voice();" onspeechchange="voice();">
 			</input>
 			<div>
 				<textarea id="data" onClick="this.select();"></textarea>
