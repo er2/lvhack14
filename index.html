@@ -620,10 +620,7 @@ var availableTags = [evenWords, oddWords];
   };
   
 	function voice() {
-		alert("success");
-		alert(document.getElementById("tags").value);
-		var input = document.getElementById("tags").value;
-		document.getElementById("data").innerHTML = input;
+		//cool stuff here
 	}
   
 	function clearn() {
@@ -640,11 +637,11 @@ var availableTags = [evenWords, oddWords];
 			<h1>PGP Word List Dictation Tool</h1>
 			<form>
 				<div>
-					<label for="tags"  class="large-8 columns">Enter PGP Words:
-						<input id="tags" type="text" x-webkit-speech>
+					<label for="tags"  class="large-8 columns">
+						Enter PGP Words:<input id="tags" type="text" onwebkitspeechchange="voice();" onspeechchange="voice();" x-webkit-speech>
 					</label>
 				</div>
-				<input id="mic" type="button" onclick="clearn();" value="clear" class="postfix small radius button" onwebkitspeechchange="voice();" onspeechchange="voice();">
+				<input id="mic" type="button" onclick="clearn();" value="clear" class="postfix small radius button">
 				</input>
 				<div>
 					<textarea id="data" onClick="this.select();"></textarea>
